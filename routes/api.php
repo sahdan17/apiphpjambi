@@ -24,4 +24,4 @@ Route::post('/getPressure', [PressController::class,'getPressure']);
 Route::post('/getPressureNext', [PressController::class,'getPressureNext']);
 Route::post('/getSEMFOLIndex', [PressController::class,'getSEMFOLIndex']);
 Route::post('/getSEMFOLNext', [PressController::class,'getSEMFOLNext']);
-Route::post('/bebas', [BebasController::class,'bebas']);
+Route::get('/bebas', [BebasController::class,'bebas']);
