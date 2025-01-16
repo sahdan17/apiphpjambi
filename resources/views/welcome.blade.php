@@ -1,1 +1,1 @@
-bang can ganteng
+bang can ganteng nian
