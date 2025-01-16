@@ -25,11 +25,11 @@ class PressController extends Controller
         $selectedDate = $request->date;
         $nextDay = Carbon::parse($selectedDate)->addDay();
         
-        $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
-            ->where('idSpot', $request->idSpot)
-            ->where('timestamp', '>=', $selectedDate)
-            ->where('timestamp', '<', $nextDay)
-            ->first();
+        // $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
+        //     ->where('idSpot', $request->idSpot)
+        //     ->where('timestamp', '>=', $selectedDate)
+        //     ->where('timestamp', '<', $nextDay)
+        //     ->first();
         
         $pressures = Pressure::where('idSpot', $request->idSpot)
                 ->where('timestamp', '>=', $selectedDate)
@@ -39,7 +39,7 @@ class PressController extends Controller
         return response()->json([
             'id' => $request->idSpot,
             'selectedDate' => $selectedDate,
-            'max' => $max->max,
+            // 'max' => $max->max,
             'pressures' => $pressures,
         ]);
     }
@@ -48,11 +48,11 @@ class PressController extends Controller
         $selectedDate = $request->date;
         $nextDay = Carbon::parse($selectedDate)->addDay();
         
-        $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
-            ->where('idSpot', $request->idSpot)
-            ->where('timestamp', '>=', $selectedDate)
-            ->where('timestamp', '<', $nextDay)
-            ->first();
+        // $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
+        //     ->where('idSpot', $request->idSpot)
+        //     ->where('timestamp', '>=', $selectedDate)
+        //     ->where('timestamp', '<', $nextDay)
+        //     ->first();
         
         $pressures = Pressure::where('idSpot', $request->idSpot)
                 ->where('timestamp', '>=', $selectedDate)
@@ -66,7 +66,7 @@ class PressController extends Controller
         return response()->json([
             'id' => $request->idSpot,
             'selectedDate' => $selectedDate,
-            'max' => $max->max,
+            // 'max' => $max->max,
             'pressures' => $pressures,
         ]);
     }
