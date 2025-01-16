@@ -1,1 +1,1 @@
-bang can ganteng nian sekali sangad keren anjay
+bang can ganteng nian sekali sangad keren anjay mantap
