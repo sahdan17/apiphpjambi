@@ -24,22 +24,27 @@ class PressController extends Controller
     public function getPressure(Request $request) {
         $selectedDate = $request->date;
         $nextDay = Carbon::parse($selectedDate)->addDay();
+        $first = $request->first;
         
-        // $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
-        //     ->where('idSpot', $request->idSpot)
-        //     ->where('timestamp', '>=', $selectedDate)
-        //     ->where('timestamp', '<', $nextDay)
-        //     ->first();
-        
-        $pressures = Pressure::where('idSpot', $request->idSpot)
+        if ($first) {
+            $pressures = Pressure::where('idSpot', $request->idSpot)
                 ->where('timestamp', '>=', $selectedDate)
                 ->where('timestamp', '<', $nextDay)
                 ->get();
+        } else {
+            $pressures = Pressure::where('idSpot', $request->idSpot)
+                ->where('timestamp', '>=', $selectedDate)
+                ->where('timestamp', '<', $nextDay)
+                ->orderBy('timestamp', 'desc')
+                ->limit(5)
+                ->get()
+                ->reverse()
+                ->values();
+        }
                 
         return response()->json([
             'id' => $request->idSpot,
             'selectedDate' => $selectedDate,
-            // 'max' => $max->max,
             'pressures' => $pressures,
         ]);
     }
@@ -47,12 +52,6 @@ class PressController extends Controller
     public function getPressureNext(Request $request) {
         $selectedDate = $request->date;
         $nextDay = Carbon::parse($selectedDate)->addDay();
-        
-        // $max = Pressure::select(DB::raw('MAX(psiValue) as max'))
-        //     ->where('idSpot', $request->idSpot)
-        //     ->where('timestamp', '>=', $selectedDate)
-        //     ->where('timestamp', '<', $nextDay)
-        //     ->first();
         
         $pressures = Pressure::where('idSpot', $request->idSpot)
                 ->where('timestamp', '>=', $selectedDate)
@@ -75,6 +74,7 @@ class PressController extends Controller
         $selectedDate = $request->date;
         $idSpot = $request->idSpot;
         $idSpotMod = $request->idSpot;
+        $first = $request->first;
         
         if ($idSpot == 15) {
             $idSpotMod = 1;
@@ -94,15 +94,35 @@ class PressController extends Controller
         
         $nextDay = Carbon::parse($selectedDate)->addDay();
         
-        $pressures = Pressure::where('idSpot', $idSpot)
+        if ($first) {
+            $pressures = Pressure::where('idSpot', $request->idSpot)
                 ->where('timestamp', '>=', $selectedDate)
                 ->where('timestamp', '<', $nextDay)
                 ->get();
-                
-        $sem = FlowData::where('idSpot', $idSpotMod)
+
+            $sem = FlowData::where('idSpot', $idSpotMod)
                 ->where('timestamp', '>=', $selectedDate)
                 ->where('timestamp', '<', $nextDay)
                 ->get();
+        } else {
+            $pressures = Pressure::where('idSpot', $request->idSpot)
+                ->where('timestamp', '>=', $selectedDate)
+                ->where('timestamp', '<', $nextDay)
+                ->orderBy('timestamp', 'desc')
+                ->limit(5)
+                ->get()
+                ->reverse()
+                ->values();
+
+            $sem = FlowData::where('idSpot', $idSpotMod)
+                ->where('timestamp', '>=', $selectedDate)
+                ->where('timestamp', '<', $nextDay)
+                ->orderBy('timestamp', 'desc')
+                ->limit(5)
+                ->get()
+                ->reverse()
+                ->values();
+        }
 
         return response()->json([
             'id' => $request->idSpot,
