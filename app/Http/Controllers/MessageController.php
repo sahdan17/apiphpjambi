@@ -12,7 +12,9 @@ class MessageController extends Controller
         $msg = Message::all();
 
         return response()->json([
-            'message' => $msg,
+            'status' => 200,
+            'message' => 'Berhasil',
+            'payload' => $msg,
         ]);
     }
 
@@ -20,7 +22,8 @@ class MessageController extends Controller
         Message::truncate();
 
         return response()->json([
-            'message' => 'Berhasil Hapus Data',
+            'status' => 200,
+            'message' => 'Berhasil',
         ]);
     }
 }
