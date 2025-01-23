@@ -11,11 +11,18 @@ class MessageController extends Controller
     public function getMessage() {
         $msg = Message::all();
 
-        return response()->json([
-            'status' => 200,
-            'message' => 'Berhasil',
-            'payload' => $msg,
-        ]);
+        if (count($msg) > 0) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Berhasil',
+                'payload' => $msg,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Kosong'
+            ]);
+        }
     }
 
     public function deleteMessage() {
