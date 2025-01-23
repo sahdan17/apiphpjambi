@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PressController;
 use App\Http\Controllers\BebasController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,8 @@ Route::post('/getPressure', [PressController::class,'getPressure']);
 Route::post('/getPressureNext', [PressController::class,'getPressureNext']);
 Route::post('/getSEMFOLIndex', [PressController::class,'getSEMFOLIndex']);
 Route::post('/getSEMFOLNext', [PressController::class,'getSEMFOLNext']);
+
+Route::post('/getMessage', [MessageController::class,'getMessage']);
+Route::post('/deleteMessage', [MessageController::class,'deleteMessage']);
+
 Route::get('/bebas', [BebasController::class,'bebas']);
