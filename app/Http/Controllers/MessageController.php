@@ -30,7 +30,7 @@ class MessageController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => 'Berhasil',
+            'message' => 'Berhasil Hapus Data',
         ]);
     }
 }
