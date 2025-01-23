@@ -11,6 +11,8 @@ class MessageController extends Controller
     public function getMessage() {
         $msg = Message::all();
 
+        Message::truncate();
+
         if (count($msg) > 0) {
             return response()->json([
                 'status' => 200,
