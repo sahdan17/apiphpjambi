@@ -11,9 +11,9 @@ class MessageController extends Controller
     public function getMessage() {
         $msg = Message::all();
 
-        Message::truncate();
+        if ($msg->isNotEmpty()) {
+            Message::whereIn('id', $msg->pluck('id'))->delete();
 
-        if (count($msg) > 0) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Berhasil',
